@@ -3,158 +3,367 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Crisantemo · Alicia Cerdán Ibáñez</title>
-  <meta name="description" content="Página promocional de Crisantemo, antología de relatos de Alicia Cerdán Ibáñez publicada por Editorial Talón de Aquiles." />
-  <meta property="og:title" content="Crisantemo · Alicia Cerdán Ibáñez" />
-  <meta property="og:description" content="Setenta relatos divididos en crisantemos de colores: aventura, ciencia-ficción, drama, fantasía, ingenio, muerte, amor y poesía sin serlo." />
-  <meta property="og:type" content="book" />
+  <title>Libros de Alicia Cerdán Ibáñez</title>
+  <meta name="description" content="Página inicial de los libros de Alicia Cerdán Ibáñez: Crisantemo y A veces escribo…" />
+  <meta property="og:title" content="Libros de Alicia Cerdán Ibáñez" />
+  <meta property="og:description" content="Elige entre Crisantemo y A veces escribo…" />
+  <meta property="og:type" content="website" />
   <meta property="og:image" content="https://editorial.talondeaquiles.es/wp-content/uploads/2025/09/Crisantemo.png" />
   <link rel="preconnect" href="https://editorial.talondeaquiles.es" />
-  <link rel="stylesheet" href="assets/styles.css" />
-
   <style>
-    .hero-actions .button,
-    .buy-links .button {
-      margin-right: .5rem;
-      margin-bottom: .5rem;
+    :root {
+      --ink: #2f251f;
+      --muted: #806f63;
+      --paper: #fffaf3;
+      --soft: #f2e3d0;
+      --line: rgba(91, 67, 50, .18);
+      --accent: #9a5b3f;
+      --accent-2: #6f4158;
+      --shadow: 0 30px 80px rgba(50, 34, 25, .18);
+      --radius: 30px;
     }
-    .button.ghost {
-      background: transparent;
-      border: 1px solid currentColor;
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 12%, rgba(154, 91, 63, .20), transparent 34%),
+        radial-gradient(circle at 88% 0%, rgba(111, 65, 88, .18), transparent 32%),
+        linear-gradient(135deg, #fffaf4 0%, #f3dfc8 55%, #dfc2a0 100%);
+      overflow-x: hidden;
     }
-    .buy-links {
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .34;
+      background-image:
+        linear-gradient(rgba(88, 60, 42, .06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(88, 60, 42, .04) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+
+    .shell {
+      width: min(1160px, calc(100% - 36px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 28px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: inherit;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 250, 243, .62);
+      box-shadow: 0 10px 30px rgba(71, 44, 28, .10);
+    }
+
+    .nav-link {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 250, 243, .48);
+    }
+
+    .hero {
+      padding: 54px 0 30px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+    }
+
+    h1 {
+      margin: 0 auto;
+      max-width: 900px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.2rem, 9vw, 7.8rem);
+      line-height: .92;
+      letter-spacing: -.06em;
+    }
+
+    .subtitle {
+      max-width: 760px;
+      margin: 28px auto 0;
+      color: var(--muted);
+      font-size: clamp(1.06rem, 2vw, 1.34rem);
+      line-height: 1.7;
+    }
+
+    .books {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+      padding: 42px 0 76px;
+    }
+
+    .book-card {
+      position: relative;
+      min-height: 650px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(255, 250, 243, .72);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: inherit;
+      isolation: isolate;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .book-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 42px 100px rgba(50, 34, 25, .24);
+      border-color: rgba(154, 91, 63, .38);
+    }
+
+    .book-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: radial-gradient(circle at 50% 0%, var(--glow), transparent 58%);
+      opacity: .82;
+    }
+
+    .book-card.crisantemo { --glow: rgba(223, 105, 83, .28); }
+    .book-card.veces { --glow: rgba(111, 65, 88, .24); }
+
+    .cover-area {
+      min-height: 390px;
+      display: grid;
+      place-items: center;
+      padding: 42px 34px 18px;
+      position: relative;
+    }
+
+    .book-cover {
+      width: min(270px, 68%);
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 30px 60px rgba(55, 38, 28, .30);
+      transform: rotate(var(--tilt));
+      background: #fff;
+      transition: transform .25s ease;
+    }
+
+    .book-card:hover .book-cover {
+      transform: rotate(0deg) scale(1.03);
+    }
+
+    .book-card.crisantemo .book-cover { --tilt: -3deg; }
+    .book-card.veces .book-cover { --tilt: 3deg; }
+
+    .badge {
+      position: absolute;
+      top: 28px;
+      right: 28px;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 250, 243, .72);
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .book-copy {
+      padding: 12px 36px 36px;
+    }
+
+    .book-copy h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+
+    .book-copy p {
+      margin: 18px 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 1.02rem;
+    }
+
+    .meta {
       display: flex;
       flex-wrap: wrap;
-      gap: .75rem;
-      align-items: center;
-      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 24px;
     }
-    @media (max-width: 760px) {
-      .buy-links {
-        justify-content: flex-start;
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .42);
+      color: #5c493f;
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 28px;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: white;
+      font-weight: 900;
+      letter-spacing: .01em;
+    }
+
+    .veces .cta { background: var(--accent-2); }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 28px 0 42px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    .footer a {
+      color: inherit;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    @media (max-width: 850px) {
+      .books {
+        grid-template-columns: 1fr;
       }
-      .buy-links .button,
-      .hero-actions .button {
-        width: 100%;
-        text-align: center;
+      .book-card {
+        min-height: auto;
+      }
+      .footer,
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hero {
+        text-align: left;
+      }
+      h1,
+      .subtitle {
+        margin-left: 0;
       }
     }
   </style>
-
 </head>
 <body>
-  <header class="site-header" id="inicio">
-    <a class="brand" href="#inicio" aria-label="Inicio">
-      <span class="brand-mark">✦</span>
-      <span>Alicia Cerdán Ibáñez</span>
-    </a>
-    <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
-    <nav class="nav" aria-label="Navegación principal">
-      <a href="#libro">Libro</a>
-      <a href="#sinopsis">Sinopsis</a>
-      <a href="#autora">Autora</a>
-      <a href="#comprar">Comprar</a>
-    </nav>
-  </header>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Inicio">
+        <span class="brand-mark">✦</span>
+        <span>Alicia Cerdán Ibáñez</span>
+      </a>
+      <a class="nav-link" href="crisantemo.html">Ir a Crisantemo</a>
+    </header>
 
-  <main>
-    <section class="hero section" id="libro">
-      <div class="hero-media" aria-label="Portada del libro Crisantemo">
-        <div class="cover-frame">
-          <img src="https://editorial.talondeaquiles.es/wp-content/uploads/2025/09/Crisantemo.png" onerror="this.onerror=null;this.src='assets/cover-fallback.svg';" alt="Portada de Crisantemo, de Alicia Cerdán Ibáñez" />
-        </div>
-        <div class="floating-badge">70 relatos</div>
-      </div>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Libros publicados</p>
+        <h1>Dos libros, dos formas de abrir una herida bonita.</h1>
+        <p class="subtitle">Elige una portada para entrar en su página: <strong>Crisantemo</strong> abre la landing de GitHub Pages y <strong>A veces escribo…</strong> te lleva directamente a ExLibric.</p>
+      </section>
 
-      <div class="hero-copy">
-        <p class="eyebrow">Antología de relatos</p>
-        <h1>Crisantemo</h1>
-        <p class="subtitle">Historias breves que florecen en ocho colores: aventura, ciencia-ficción, drama, fantasía, ingenio, muerte, amor y poesía sin serlo.</p>
-        <div class="hero-actions" id="comprar">
-          <a class="button primary" href="https://editorial.talondeaquiles.es/product/crisantemo/" target="_blank" rel="noopener">Editorial</a>
-          <a class="button secondary" href="https://www.casadellibro.com/libro-crisantemo/9791387807078/17518914?srsltid=AfmBOoqljwVus1dBKDjP5V1rHkgIsDiGVR3AgkvOexYvZJCamcIaPEr4" target="_blank" rel="noopener">Casa del Libro</a>
-          <a class="button secondary" href="https://www.amazon.es/Crisantemo-Alicia-Cerd%C3%A1n-Ib%C3%A1%C3%B1ez/dp/B0FT3N1F67" target="_blank" rel="noopener">Amazon</a>
-          <a class="button secondary" href="https://www.fnac.es/a12451804/Alicia-Cerdan-Ibanez-Crisantemo" target="_blank" rel="noopener">Fnac</a>
-          <a class="button ghost" href="#primeras-paginas">Descubrir el libro</a>
-        </div>
+      <section class="books" aria-label="Listado de libros">
+        <a class="book-card crisantemo" href="crisantemo.html" aria-label="Abrir la página de Crisantemo">
+          <span class="badge">Relatos</span>
+          <div class="cover-area">
+            <img class="book-cover" src="https://editorial.talondeaquiles.es/wp-content/uploads/2025/09/Crisantemo.png" onerror="this.onerror=null;this.src='assets/cover-fallback.svg';" alt="Portada de Crisantemo" />
+          </div>
+          <div class="book-copy">
+            <h2>Crisantemo</h2>
+            <p>Setenta relatos divididos en crisantemos de colores: aventura, ciencia-ficción, drama, fantasía, ingenio, muerte, amor y poesía sin serlo.</p>
+            <div class="meta">
+              <span class="pill">Talón de Aquiles</span>
+              <span class="pill">246 páginas</span>
+              <span class="pill">ISBN 9791387807078</span>
+            </div>
+            <span class="cta">Ver detalles →</span>
+          </div>
+        </a>
 
-        <dl class="tech-card" aria-label="Ficha técnica">
-          <div><dt>Autora</dt><dd>Alicia Cerdán Ibáñez</dd></div>
-          <div><dt>Editorial</dt><dd>Talón de Aquiles</dd></div>
-          <div><dt>ISBN</dt><dd>9791387807078</dd></div>
-          <div><dt>Páginas</dt><dd>246</dd></div>
-          <div><dt>Formato</dt><dd>Tapa blanda</dd></div>
-          <div><dt>Publicación</dt><dd>24/03/2025</dd></div>
-        </dl>
-      </div>
-    </section>
+        <a class="book-card veces" href="https://www.exlibric.com/libro/a-veces-escribo/" target="_blank" rel="noopener" aria-label="Abrir A veces escribo en ExLibric">
+          <span class="badge">Reflexiones</span>
+          <div class="cover-area">
+            <img class="book-cover" src="https://www.exlibric.com/wp-content/uploads/2026/06/Portada-A-veces-escribo-752x1024.webp" onerror="this.onerror=null;this.src='assets/a-veces-escribo-fallback.svg';" alt="Portada decorativa de A veces escribo…" />
+          </div>
+          <div class="book-copy">
+            <h2>A veces escribo…</h2>
+            <p>Frases, reflexiones y pensamientos sobre amor, desamor, soledad, miedo, rabia, vida y pequeñas formas de seguir adelante.</p>
+            <div class="meta">
+              <span class="pill">ExLibric</span>
+              <span class="pill">194 páginas</span>
+              <span class="pill">Junio 2026</span>
+            </div>
+            <span class="cta">Comprar en ExLibric →</span>
+          </div>
+        </a>
+      </section>
+    </main>
 
-    <section class="section intro" id="primeras-paginas">
-      <div class="section-heading">
-        <p class="eyebrow">Entre pétalos y pensamientos</p>
-        <h2>Un ramo de relatos para abrir por cualquier color</h2>
-      </div>
-      <div class="intro-grid">
-        <article class="color-card orange"><span>Naranja</span><strong>Aventura</strong></article>
-        <article class="color-card silver"><span>Plateado</span><strong>Ciencia-ficción</strong></article>
-        <article class="color-card pink"><span>Rosa</span><strong>Drama</strong></article>
-        <article class="color-card violet"><span>Violeta</span><strong>Fantasía</strong></article>
-        <article class="color-card yellow"><span>Amarillo</span><strong>Ingenio</strong></article>
-        <article class="color-card black"><span>Negro</span><strong>Muerte</strong></article>
-        <article class="color-card red"><span>Rojo</span><strong>Amor</strong></article>
-        <article class="color-card white"><span>Blanco</span><strong>Poesía sin serlo</strong></article>
-      </div>
-    </section>
+    <footer class="footer">
+      <p>© <span id="year"></span> Alicia Cerdán Ibáñez · Página promocional.</p>
+      <a href="https://www.exlibric.com/libro/a-veces-escribo/" target="_blank" rel="noopener">A veces escribo… en ExLibric</a>
+    </footer>
+  </div>
 
-    <section class="section split" id="sinopsis">
-      <div>
-        <p class="eyebrow">Sinopsis</p>
-        <h2>Miles de historias como los pétalos de un crisantemo</h2>
-      </div>
-      <div class="prose">
-        <p><strong>Crisantemo</strong> reúne setenta relatos divididos en crisantemos de colores. Cada sección propone un tono distinto y permite recorrer mundos de aventura, ciencia-ficción, drama, fantasía, ingenio, muerte, amor y poesía.</p>
-        <p>Son textos nacidos de tres palabras, de un tema dado o de un pensamiento intrusivo: pétalos que surcaban el cielo como una idea con la fuerza suficiente para trasladarse al papel.</p>
-        <p>La imagen del crisantemo atraviesa el libro como una leyenda: cuando una madre rasga una flor para multiplicar sus pétalos, alarga simbólicamente la vida de su hijo. Esa misma multiplicación de pétalos se convierte aquí en una colección de pequeñas vidas narradas.</p>
-      </div>
-    </section>
-
-    <section class="section quote-band" aria-label="Cita destacada">
-      <blockquote>
-        “Setenta relatos, ocho colores y una misma raíz: escribir para que una idea no se pierda.”
-      </blockquote>
-    </section>
-
-    <section class="section author" id="autora">
-      <div class="author-card">
-        <div class="author-initials">AC</div>
-        <div>
-          <p class="eyebrow">Sobre la autora</p>
-          <h2>Alicia Cerdán Ibáñez</h2>
-          <p>Alicia Cerdán Ibáñez nació en Cetina, Zaragoza. Estudió Filología Hispánica y continuó su formación con un máster en Escritura Creativa. Además de <em>Crisantemo</em>, ha participado en antologías de relatos y sigue desarrollando nuevos proyectos narrativos.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section buy-panel">
-      <div>
-        <p class="eyebrow">Disponible online</p>
-        <h2>Hazte con Crisantemo</h2>
-        <p>Compra el libro desde la editorial o desde tus librerías online habituales.</p>
-      </div>
-      <div class="buy-links" aria-label="Enlaces de compra">
-        <a class="button primary large" href="https://editorial.talondeaquiles.es/product/crisantemo/" target="_blank" rel="noopener">Editorial</a>
-        <a class="button secondary large" href="https://www.casadellibro.com/libro-crisantemo/9791387807078/17518914?srsltid=AfmBOoqljwVus1dBKDjP5V1rHkgIsDiGVR3AgkvOexYvZJCamcIaPEr4" target="_blank" rel="noopener">Casa del Libro</a>
-        <a class="button secondary large" href="https://www.amazon.es/Crisantemo-Alicia-Cerd%C3%A1n-Ib%C3%A1%C3%B1ez/dp/B0FT3N1F67" target="_blank" rel="noopener">Amazon</a>
-        <a class="button secondary large" href="https://www.fnac.es/a12451804/Alicia-Cerdan-Ibanez-Crisantemo" target="_blank" rel="noopener">Fnac</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <p>© <span id="year"></span> Alicia Cerdán Ibáñez · Página promocional no oficial de tienda.</p>
-    <a href="#inicio">Volver arriba ↑</a>
-  </footer>
-
-  <script src="assets/main.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
